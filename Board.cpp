@@ -95,5 +95,5 @@ bool Board::solve(int row, int col) {
 }
 
 bool Board::isEmptyCharacter(char c) {
-	return (c == 'x' || c == 'X' || c == '0' || c == 'O' || c == '.');
+	return (c == 'x' || c == 'X' || c == '0' || c == 'O' || c == 'o' || c == '.');
 }
