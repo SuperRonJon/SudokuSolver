@@ -129,11 +129,13 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="InputParser.cpp" />
     <ClCompile Include="SudokuSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="InputParser.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

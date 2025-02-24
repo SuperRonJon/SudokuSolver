@@ -4,18 +4,22 @@
 #include <iostream>
 #include "Board.h"
 #include <string>
+#include "InputParser.h"
 
 void solveBoard(std::string boardString, bool borders);
 
 int main(int argc, char* argv[])
 {
-    if (argc != 2) {
-        std::cout << "Invalid arguments. Enter single string representing sudoku board\n" <<
-            "For example: x56xxx27872xx361xx8xxxxx46x5xxx47xxx4x9xxx7x5xxx65xxx4x35xxxxx7xx718xx32918xxx54x" << std::endl;
-        return -1;
+    InputParser parser(argc, argv);
+    
+    bool bordersOn = parser.getBordersOn();
+    std::string boardString = parser.getBoardString();
+    if (boardString != "") {
+        solveBoard(boardString, bordersOn);
+        return 0;
     }
-    std::string boardString = argv[1];
-    solveBoard(boardString, true);
+    return -1;
+    
 }
 
 void solveBoard(std::string boardString, bool borders) {
