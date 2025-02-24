@@ -1,8 +1,11 @@
-sudoku: box.o board.o sudokusolver.o
-	g++ out/box.o out/board.o out/sudokusolver.o -o out/sudoku
+sudoku: box.o board.o sudokusolver.o inputparser.o
+	g++ out/box.o out/board.o out/sudokusolver.o out/inputparser.o -o out/sudoku
 
 sudokusolver.o: SudokuSolver.cpp
 	g++ -c SudokuSolver.cpp -o out/sudokusolver.o
+
+inputparser.o: InputParser.cpp
+	g++ -c InputParser.cpp -o out/inputparser.o
 
 board.o: Board.cpp
 	g++ -c Board.cpp -o out/board.o
