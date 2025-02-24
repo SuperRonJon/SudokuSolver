@@ -2,8 +2,8 @@
 //
 
 #include <iostream>
-#include "Board.h"
 #include <string>
+#include "Board.h"
 #include "InputParser.h"
 
 void solveBoard(std::string boardString, bool borders);
