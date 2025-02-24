@@ -58,6 +58,7 @@ void InputParser::settingsFromTokens() {
 				switch (splitOptions[j]) {
 				case 'b':
 					printBorders = true;
+					break;
 				}
 			}
 		}
