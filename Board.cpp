@@ -37,7 +37,7 @@ void Board::print(bool borders) {
 }
 
 void Board::printLine() {
-	std::cout << "---------------------" << std::endl;
+	std::cout << "------+-------+------" << std::endl;
 }
 
 bool Board::isPossibility(int number, int row, int col) {
