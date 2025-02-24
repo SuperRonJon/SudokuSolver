@@ -12,6 +12,7 @@ class Board
 	bool columnContains(int number, int col);
 	bool squareContains(int number, int row, int col);
 	bool solve(int row, int col);
+	bool isEmptyCharacter(char c);
 
 public:
 	Board(std::string input);

@@ -6,7 +6,7 @@ Board::Board(std::string input) {
 
 	for (int i = 0; i < BOARD_SIZE; i++) {
 		for (int j = 0; j < BOARD_SIZE; j++) {
-			if (input[index] != 'x') {
+			if (!isEmptyCharacter(input[index])) {
 				grid[i][j] = Box(input[index] - '0');
 			}
 			else {
@@ -92,4 +92,8 @@ bool Board::solve(int row, int col) {
 		}
 	}
 	return false;
+}
+
+bool Board::isEmptyCharacter(char c) {
+	return (c == 'x' || c == 'X' || c == '0' || c == 'O' || c == '.');
 }
