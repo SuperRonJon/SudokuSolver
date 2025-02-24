@@ -19,11 +19,11 @@ int main(int argc, char* argv[])
         return -1;
     }
     Board board(boardString);
-    board.print();
+    board.print(true);
     bool solved = board.solve();
     if (solved) {
         std::cout << "Solved!" << std::endl;
-        board.print();
+        board.print(true);
     }
     else {
         std::cout << "Unable to solve..." << std::endl;

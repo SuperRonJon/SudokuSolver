@@ -16,9 +16,15 @@ Board::Board(std::string input) {
 		}
 	}
 }
-void Board::print() {
+void Board::print(bool borders) {
 	for (int i = 0; i < BOARD_SIZE; i++) {
+		if (borders && i != 0 && i % 3 == 0) {
+			printLine();
+		}
 		for (int j = 0; j < BOARD_SIZE; j++) {
+			if (borders && j != 0 && j % 3 == 0) {
+				std::cout << "| ";
+			}
 			if (!grid[i][j].isEmpty()) {
 				std::cout << std::to_string(grid[i][j].getValue()) << " ";
 			}
@@ -28,6 +34,10 @@ void Board::print() {
 		}
 		std::cout << std::endl;
 	}
+}
+
+void Board::printLine() {
+	std::cout << "---------------------" << std::endl;
 }
 
 bool Board::isPossibility(int number, int row, int col) {

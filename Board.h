@@ -13,11 +13,12 @@ class Board
 	bool squareContains(int number, int row, int col);
 	bool solve(int row, int col);
 	bool isEmptyCharacter(char c);
+	void printLine();
 
 public:
 	Board(std::string input);
 	bool solve();
-	void print();
+	void print(bool borders = false);
 	int valueAt(int row, int col);
 
 };
