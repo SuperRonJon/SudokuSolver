@@ -18,6 +18,9 @@ InputParser::InputParser(int argc, char* argv[]) {
 	for (int i = 0; i < argc; i++) {
 		tokens.push_back(argv[i]);
 	}
+	printBorders = false;
+	printBeforeSolved = true;
+	fileInput = false;
 	settingsFromTokens();
 }
 
@@ -35,18 +38,15 @@ void InputParser::printOptions(std::vector<char> options) {
 
 void InputParser::settingsFromTokens() {
 	if (tokens.size() < 2) {
-		printBorders = false;
 		boardString = "";
 		return;
 	}
 	if (tokens.size() == 2 && !startsWith(tokens[1], '-')) {
 		
-		printBorders = false;
 		boardString = tokens[1];
 		return;
 	}
 	if (tokens.size() == 2 && startsWith(tokens[1], '-')) {
-		printBorders = false;
 		boardString = "";
 		return;
 	}
@@ -58,6 +58,12 @@ void InputParser::settingsFromTokens() {
 				switch (splitOptions[j]) {
 				case 'b':
 					printBorders = true;
+					break;
+				case 'p':
+					printBeforeSolved = false;
+					break;
+				case 'f':
+					fileInput = true;
 					break;
 				}
 			}
@@ -77,5 +83,13 @@ bool InputParser::getBordersOn() {
 
 std::string InputParser::getBoardString() {
 	return boardString;
+}
+
+bool InputParser::getPrintBeforeSolved() {
+	return printBeforeSolved;
+}
+
+bool InputParser::isFileInput() {
+	return fileInput;
 }
 

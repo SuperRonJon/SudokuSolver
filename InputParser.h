@@ -7,6 +7,8 @@ class InputParser
 	std::vector<std::string> tokens;
 	bool printBorders;
 	std::string boardString;
+	bool printBeforeSolved;
+	bool fileInput;
 
 	std::vector<char> split(std::string options);
 	void settingsFromTokens();
@@ -19,5 +21,7 @@ public:
 	InputParser(int argc, char* argv[]);
 	bool getBordersOn();
 	std::string getBoardString();
+	bool getPrintBeforeSolved();
+	bool isFileInput();
 };
 
