@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
             return 0;
         }
         solveBoardsFromFile(boardString, bordersOn, printBeforeSolved);
-
+        return 0;
     }
     std::cout << "No board string detected. Must be 81 character string with one of x,X,0,o,O,. as empty characers." << std::endl;
     std::cout << "Example: " << exampleBoard << std::endl;
