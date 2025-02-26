@@ -21,6 +21,7 @@ InputParser::InputParser(int argc, char* argv[]) {
 	printBorders = false;
 	printBeforeSolved = true;
 	fileInput = false;
+	countChecks = false;
 	settingsFromTokens();
 }
 
@@ -65,6 +66,9 @@ void InputParser::settingsFromTokens() {
 				case 'f':
 					fileInput = true;
 					break;
+				case 'c':
+					countChecks = true;
+					break;
 				}
 			}
 		}
@@ -91,5 +95,9 @@ bool InputParser::getPrintBeforeSolved() {
 
 bool InputParser::isFileInput() {
 	return fileInput;
+}
+
+bool InputParser::getCountChecks() {
+	return countChecks;
 }
 

@@ -9,6 +9,7 @@ class InputParser
 	std::string boardString;
 	bool printBeforeSolved;
 	bool fileInput;
+	bool countChecks;
 
 	std::vector<char> split(std::string options);
 	void settingsFromTokens();
@@ -23,5 +24,6 @@ public:
 	std::string getBoardString();
 	bool getPrintBeforeSolved();
 	bool isFileInput();
+	bool getCountChecks();
 };
 

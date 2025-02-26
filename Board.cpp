@@ -77,11 +77,11 @@ int Board::valueAt(int row, int col) {
 	return grid[row][col].getValue();
 }
 
-bool Board::solve() {
-	return solve(0, 0);
+bool Board::solve(long long& counter) {
+	return solve(0, 0, counter);
 }
 
-bool Board::solve(int row, int col) {
+bool Board::solve(int row, int col, long long& counter) {
 	if (row == BOARD_SIZE - 1 && col == BOARD_SIZE) 
 		return true;
 	if (col == BOARD_SIZE) {
@@ -90,12 +90,14 @@ bool Board::solve(int row, int col) {
 	}
 
 	if (!grid[row][col].isEmpty())
-		return solve(row, col+1);
+		return solve(row, col+1, counter);
 
 	for (int i = 1; i <= BOARD_SIZE; i++) {
+		if(counter != -1)
+			counter++;
 		if (isPossibility(i, row, col)) {
 			grid[row][col].setValue(i);
-			if (solve(row, col + 1)) {
+			if (solve(row, col + 1, counter)) {
 				return true;
 			}
 			grid[row][col].clear();
