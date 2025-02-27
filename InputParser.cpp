@@ -22,6 +22,7 @@ InputParser::InputParser(int argc, char* argv[]) {
 	printBeforeSolved = true;
 	fileInput = false;
 	countChecks = false;
+	minChecks = -1;
 	settingsFromTokens();
 }
 
@@ -51,6 +52,7 @@ void InputParser::settingsFromTokens() {
 		boardString = "";
 		return;
 	}
+	int minChecksTokenIndex = -1;
 	for (int i = 0; i < tokens.size(); i++) {
 		if (startsWith(tokens[i], '-')) {
 			std::string options = tokens[i].substr(1, tokens[i].size() - 1);
@@ -69,7 +71,15 @@ void InputParser::settingsFromTokens() {
 				case 'c':
 					countChecks = true;
 					break;
+				case 'r':
+					minChecksTokenIndex = i+1;
+					break;
 				}
+			}
+		}
+		else {
+			if (i == minChecksTokenIndex && i != tokens.size() - 1) {
+				minChecks = std::stoi(tokens[i]);
 			}
 		}
 	}
@@ -99,5 +109,9 @@ bool InputParser::isFileInput() {
 
 bool InputParser::getCountChecks() {
 	return countChecks;
+}
+
+int InputParser::getMinChecks() {
+	return minChecks;
 }
 

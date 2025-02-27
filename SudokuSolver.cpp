@@ -4,10 +4,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "Board.h"
 #include "InputParser.h"
 
-void solveBoard(std::string boardString, InputParser parser);
+long long solveBoard(std::string boardString, InputParser parser);
 void solveBoardsFromFile(std::string fileName, InputParser parser);
 
 int main(int argc, char* argv[])
@@ -34,13 +35,13 @@ int main(int argc, char* argv[])
     
 }
 
-void solveBoard(std::string boardString, InputParser parser) {
+long long solveBoard(std::string boardString, InputParser parser) {
     bool borders = parser.getBordersOn();
     bool printBeforeSolved = parser.getPrintBeforeSolved();
     bool countChecks = parser.getCountChecks();
     if (boardString.size() != 81) {
         std::cout << "Invalid board string, incorrect length, must be 81 characters" << std::endl;
-        return;
+        return -1;
     }
 
     Board board(boardString);
@@ -63,17 +64,32 @@ void solveBoard(std::string boardString, InputParser parser) {
         else
             std::cout << "Unable to solve..." << std::endl;
     }
+    return counter;
 }
 
 void solveBoardsFromFile(std::string fileName, InputParser parser) {
     std::ifstream infile(fileName);
     std::string line;
+    std::vector<std::string> bigCounts;
+    const int MIN_COUNTS = parser.getMinChecks();
     int count = 0;
     while (infile >> line) {
         count++;
         std::cout << "Puzzle #" << count << " - " << line << std::endl;
-        solveBoard(line, parser);
+        long long count = solveBoard(line, parser);
+        if (count >= MIN_COUNTS && MIN_COUNTS != -1) {
+            bigCounts.push_back(line);
+        }
     }
+
+    if (MIN_COUNTS != -1) {
+        std::cout << "Puzzles with required checks over " << MIN_COUNTS << std::endl;
+        std::cout << "==========================================" << std::endl;
+        for (int i = 0; i < bigCounts.size(); i++) {
+            std::cout << bigCounts[i] << std::endl;
+        }
+    }
+    
 }
 
 

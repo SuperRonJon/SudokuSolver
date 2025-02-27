@@ -10,6 +10,7 @@ class InputParser
 	bool printBeforeSolved;
 	bool fileInput;
 	bool countChecks;
+	int minChecks;
 
 	std::vector<char> split(std::string options);
 	void settingsFromTokens();
@@ -25,5 +26,6 @@ public:
 	bool getPrintBeforeSolved();
 	bool isFileInput();
 	bool getCountChecks();
+	int getMinChecks();
 };
 
