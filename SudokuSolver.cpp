@@ -29,9 +29,33 @@ int main(int argc, char* argv[])
         solveBoardsFromFile(boardString, parser);
         return 0;
     }
+    
+    std::string boardInput = "";
+    bool hasTried = false;
+    do {
+        if (hasTried) {
+            std::cout << "Invalid board... Try entering a board again." << std::endl;
+        }
+        else {
+            hasTried = true;
+        }
+
+        std::cout << "Enter board string here (or type exit to exit): ";
+        std::cin >> boardInput;
+        std::cout << std::endl;
+        if (boardInput != "exit" && boardInput.size() == 81) {
+            solveBoard(boardInput, parser);
+            hasTried = false;
+        }
+    } while (boardInput != "exit");
+
+    return 0;
+    
+    /*
     std::cout << "No board string detected. Must be 81 character string with one of x,X,0,o,O,. as empty characers." << std::endl;
     std::cout << "Example: " << exampleBoard << std::endl;
     return -1;
+    */
     
 }
 

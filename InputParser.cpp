@@ -39,6 +39,7 @@ void InputParser::printOptions(std::vector<char> options) {
 }
 
 void InputParser::settingsFromTokens() {
+	bool setBoardString = true;
 	if (tokens.size() < 2) {
 		boardString = "";
 		return;
@@ -50,15 +51,14 @@ void InputParser::settingsFromTokens() {
 	}
 	if (tokens.size() == 2 && startsWith(tokens[1], '-')) {
 		boardString = "";
-		return;
+		setBoardString = false;
 	}
 	int minChecksTokenIndex = -1;
 	for (int i = 0; i < tokens.size(); i++) {
 		if (startsWith(tokens[i], '-')) {
 			std::string options = tokens[i].substr(1, tokens[i].size() - 1);
-			std::vector<char> splitOptions = split(options);
-			for (int j = 0; j < splitOptions.size(); j++) {
-				switch (splitOptions[j]) {
+			for (int j = 0; j < options.size(); j++) {
+				switch (options[j]) {
 				case 'b':
 					printBorders = true;
 					break;
@@ -83,7 +83,8 @@ void InputParser::settingsFromTokens() {
 			}
 		}
 	}
-	boardString = tokens[tokens.size() - 1];
+	if(setBoardString)
+		boardString = tokens[tokens.size() - 1];
 }
 
 bool InputParser::startsWith(std::string token, char starting) {
