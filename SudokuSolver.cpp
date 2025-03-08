@@ -42,9 +42,12 @@ int main(int argc, char* argv[])
 
         std::cout << "Enter board string here (or type exit to exit): ";
         std::cin >> boardInput;
-        std::cout << std::endl;
         if (boardInput != "exit" && boardInput.size() == 81) {
             solveBoard(boardInput, parser);
+            hasTried = false;
+        }
+        else if (boardInput == "example") {
+            std::cout << "Example: " << exampleBoard << std::endl;
             hasTried = false;
         }
     } while (boardInput != "exit");
