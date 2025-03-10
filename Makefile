@@ -1,17 +1,17 @@
-sudoku: box.o board.o sudokusolver.o inputparser.o
-	g++ out/box.o out/board.o out/sudokusolver.o out/inputparser.o -o out/sudoku
+sudoku: out/box.o out/board.o out/sudokusolver.o out/inputparser.o
+	g++ -O2 out/box.o out/board.o out/sudokusolver.o out/inputparser.o -o out/sudoku
 
-sudokusolver.o: SudokuSolver.cpp
-	g++ -c SudokuSolver.cpp -o out/sudokusolver.o
+out/sudokusolver.o: SudokuSolver.cpp
+	g++ -c -O2 SudokuSolver.cpp -o out/sudokusolver.o
 
-inputparser.o: InputParser.cpp
-	g++ -c InputParser.cpp -o out/inputparser.o
+out/inputparser.o: InputParser.cpp
+	g++ -c -O2 InputParser.cpp -o out/inputparser.o
 
-board.o: Board.cpp
-	g++ -c Board.cpp -o out/board.o
+out/board.o: Board.cpp
+	g++ -c -O2 Board.cpp -o out/board.o
 
-box.o: Box.cpp
-	g++ -c Box.cpp -o out/box.o
+out/box.o: Box.cpp
+	g++ -c -O2 Box.cpp -o out/box.o
 
 clean:
 	del out\*
