@@ -17,4 +17,4 @@ clean:
 	del out\*
 
 clean-linux:
-	rm out/*
+	rm out/*.o out/sudoku
