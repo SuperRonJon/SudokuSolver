@@ -15,6 +15,11 @@ int main(int argc, char* argv[])
 {
     std::string exampleBoard = "x56xxx27872xx361xx8xxxxx46x5xxx47xxx4x9xxx7x5xxx65xxx4x35xxxxx7xx718xx32918xxx54x";
     InputParser parser(argc, argv);
+
+    if(parser.getPrintVersion()) {
+	std::cout << "SudokuSolver Version 1.1\n";
+	return 0;
+    }
     
     std::string boardString = parser.getBoardString();
     if (boardString == "example") {

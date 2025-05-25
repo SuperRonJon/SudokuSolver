@@ -23,6 +23,7 @@ InputParser::InputParser(int argc, char* argv[]) {
 	fileInput = false;
 	countChecks = false;
 	minChecks = -1;
+	printVersion = false;
 	settingsFromTokens();
 }
 
@@ -55,7 +56,13 @@ void InputParser::settingsFromTokens() {
 	}
 	int minChecksTokenIndex = -1;
 	for (int i = 0; i < tokens.size(); i++) {
-		if (startsWith(tokens[i], '-')) {
+		if (startsWith(tokens[i], "--")) {
+			std::string command = tokens[i].substr(2, tokens[i].size() - 1);
+			if (command == "version") {
+				printVersion = true;
+			}
+		}
+		else if (startsWith(tokens[i], '-')) {
 			std::string options = tokens[i].substr(1, tokens[i].size() - 1);
 			for (int j = 0; j < options.size(); j++) {
 				switch (options[j]) {
@@ -92,6 +99,11 @@ bool InputParser::startsWith(std::string token, char starting) {
 	return false;
 }
 
+bool InputParser::startsWith(std::string token, std::string starting) {
+	if(token.rfind(starting, 0) == 0) return true;
+	return false;
+}
+
 bool InputParser::getBordersOn() {
 	return printBorders;
 }
@@ -116,3 +128,6 @@ int InputParser::getMinChecks() {
 	return minChecks;
 }
 
+bool InputParser::getPrintVersion() {
+	return printVersion;
+}

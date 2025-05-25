@@ -11,10 +11,12 @@ class InputParser
 	bool fileInput;
 	bool countChecks;
 	int minChecks;
+	bool printVersion;
 
 	std::vector<char> split(std::string options);
 	void settingsFromTokens();
 	bool startsWith(std::string token, char starting);
+	bool startsWith(std::string token, std::string starting);
 	void printTokens();
 	void printOptions(std::vector<char> options);
 
@@ -27,5 +29,6 @@ public:
 	bool isFileInput();
 	bool getCountChecks();
 	int getMinChecks();
+	bool getPrintVersion();
 };
 
