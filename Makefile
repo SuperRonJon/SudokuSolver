@@ -1,29 +1,29 @@
-out/sudoku: out/box.o out/board.o out/sudokusolver.o out/inputparser.o
-	g++ -O2 out/box.o out/board.o out/sudokusolver.o out/inputparser.o -o out/sudoku
+build/sudoku: build/box.o build/board.o build/sudokusolver.o build/argumentparser.o
+	g++ -Wall -Wextra -O2 build/box.o build/board.o build/sudokusolver.o build/argumentparser.o -o build/sudoku
 
-out/sudokusolver.o: SudokuSolver.cpp
-	g++ -c -O2 SudokuSolver.cpp -o out/sudokusolver.o
+build/sudokusolver.o: src/SudokuSolver.cpp
+	g++ -Wall -Wextra -c -O2 src/SudokuSolver.cpp -o build/sudokusolver.o
 
-out/inputparser.o: InputParser.cpp
-	g++ -c -O2 InputParser.cpp -o out/inputparser.o
+build/argumentparser.o: src/ArgumentParser.cpp
+	g++ -Wall -Wextra -c -O2 src/ArgumentParser.cpp -o build/argumentparser.o
 
-out/board.o: Board.cpp
-	g++ -c -O2 Board.cpp -o out/board.o
+build/board.o: src/Board.cpp
+	g++ -Wall -Wextra -c -O2 src/Board.cpp -o build/board.o
 
-out/box.o: Box.cpp
-	g++ -c -O2 Box.cpp -o out/box.o
+build/box.o: src/Box.cpp
+	g++ -Wall -Wextra -c -O2 src/Box.cpp -o build/box.o
 
-out/debug: SudokuSolver.cpp InputParser.cpp Board.cpp Box.cpp
-	g++ Box.cpp Board.cpp InputParser.cpp SudokuSolver.cpp -o out/debug -g
+build/debug: src/SudokuSolver.cpp src/ArgumentParser.cpp src/Board.cpp src/Box.cpp
+	g++ -Wall -Wextra -Wpedantic src/Box.cpp src/Board.cpp src/ArgumentParser.cpp src/SudokuSolver.cpp -o build/debug -g
 
-debug: out/debug
+debug: build/debug
 
-sudoku: out/sudoku
+sudoku: build/sudoku
 
-all: out/debug out/sudoku
+all: build/debug build/sudoku
+
+clean-windows:
+	del build\*
 
 clean:
-	del out\*
-
-clean-linux:
-	rm out/*.o out/sudoku
+	rm build/*.o build/sudoku build/debug
