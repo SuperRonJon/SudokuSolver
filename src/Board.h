@@ -16,7 +16,7 @@ class Board
 	void printLine();
 
 public:
-	Board(std::string input);
+	Board(const std::string &input);
 	bool solve(long long& counter);
 	void print(bool borders = false);
 	int valueAt(int row, int col);

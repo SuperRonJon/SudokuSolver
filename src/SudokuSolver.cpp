@@ -11,14 +11,14 @@
 
 #define VERSION "1.1"
 
-long long solveBoard(std::string boardString, ArgumentParser parser);
-void solveBoardsFromFile(std::string fileName, ArgumentParser parser);
+long long solveBoard(const std::string &boardString, ArgumentParser &parser);
+void solveBoardsFromFile(const std::string &fileName, ArgumentParser &parser);
 
 ArgumentParser getParser();
 
 int main(int argc, char* argv[])
 {
-    std::string exampleBoard = "x56xxx27872xx361xx8xxxxx46x5xxx47xxx4x9xxx7x5xxx65xxx4x35xxxxx7xx718xx32918xxx54x";
+    const std::string exampleBoard = "x56xxx27872xx361xx8xxxxx46x5xxx47xxx4x9xxx7x5xxx65xxx4x35xxxxx7xx718xx32918xxx54x";
     ArgumentParser parser = getParser();
     parser.parse(argc, argv);
 
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
     bool hasTried = false;
     do {
         if (hasTried) {
-            std::cout << "Invalid board... Try entering a board again." << std::endl;
+            std::cout << "Invalid board... Try entering a board again.\n";
         }
         else {
             hasTried = true;
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
             hasTried = false;
         }
         else if (boardInput == "example") {
-            std::cout << "Example: " << exampleBoard << std::endl;
+            std::cout << "Example: " << exampleBoard << "\n";
             hasTried = false;
         }
     } while (boardInput != "exit");
@@ -79,12 +79,12 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-long long solveBoard(std::string boardString, ArgumentParser parser) {
-    bool borders = parser.was_given("borders");
-    bool printBeforeSolved = !parser.was_given("print-solved");
-    bool countChecks = parser.was_given("count");
+long long solveBoard(const std::string &boardString, ArgumentParser &parser) {
+    const bool borders = parser.was_given("borders");
+    const bool printBeforeSolved = !parser.was_given("print-solved");
+    const bool countChecks = parser.was_given("count");
     if (boardString.size() != 81) {
-        std::cout << "Invalid board string, incorrect length, must be 81 characters" << std::endl;
+        std::cout << "Invalid board string, incorrect length, must be 81 characters\n";
         return -1;
     }
 
@@ -97,21 +97,21 @@ long long solveBoard(std::string boardString, ArgumentParser parser) {
         
     if (board.solve(counter)) {
         if (counter != -1)
-            std::cout << "Solved in " << counter << " checks!" << std::endl;
+            std::cout << "Solved in " << counter << " checks!\n";
         else
-            std::cout << "Solved!" << std::endl;
+            std::cout << "Solved!\n";
         board.print(borders);
     }
     else {
         if (counter != -1)
-            std::cout << "Unable to solve after " << counter << " checks..." << std::endl;
+            std::cout << "Unable to solve after " << counter << " checks...\n";
         else
-            std::cout << "Unable to solve..." << std::endl;
+            std::cout << "Unable to solve...\n";
     }
     return counter;
 }
 
-void solveBoardsFromFile(std::string fileName, ArgumentParser parser) {
+void solveBoardsFromFile(const std::string &fileName, ArgumentParser &parser) {
     std::ifstream infile(fileName);
     std::string line;
     std::vector<std::string> bigCounts;
@@ -126,7 +126,7 @@ void solveBoardsFromFile(std::string fileName, ArgumentParser parser) {
     int count = 0;
     while (infile >> line) {
         count++;
-        std::cout << "Puzzle #" << count << " - " << line << std::endl;
+        std::cout << "Puzzle #" << count << " - " << line << "\n";
         long long count = solveBoard(line, parser);
         if (count >= min_counts && min_counts != -1) {
             bigCounts.push_back(line);
@@ -134,10 +134,10 @@ void solveBoardsFromFile(std::string fileName, ArgumentParser parser) {
     }
 
     if (min_counts != -1) {
-        std::cout << "Puzzles with required checks over " << min_counts << std::endl;
-        std::cout << "==========================================" << std::endl;
+        std::cout << "Puzzles with required checks over " << min_counts << "\n";
+        std::cout << "==========================================\n";
         for (std::size_t i = 0; i < bigCounts.size(); i++) {
-            std::cout << bigCounts[i] << std::endl;
+            std::cout << bigCounts[i] << "\n";
         }
     }
     

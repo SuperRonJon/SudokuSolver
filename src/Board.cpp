@@ -1,7 +1,7 @@
 #include "Board.h"
 #include <iostream>
 
-Board::Board(std::string input) {
+Board::Board(const std::string &input) {
 	int index = 0;
 
 	for (int i = 0; i < BOARD_SIZE; i++) {
@@ -32,12 +32,12 @@ void Board::print(bool borders) {
 				std::cout << "x ";
 			}
 		}
-		std::cout << std::endl;
+		std::cout << "\n";
 	}
 }
 
 void Board::printLine() {
-	std::cout << "------+-------+------" << std::endl;
+	std::cout << "------+-------+------\n";
 }
 
 bool Board::isPossibility(int number, int row, int col) {
