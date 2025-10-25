@@ -51,9 +51,9 @@ int main(int argc, char* argv[])
         return 0;
     }
     
-    std::string boardInput = "";
+    std::string boardInput;
     bool hasTried = false;
-    do {
+    while (boardInput != "exit") {
         if (hasTried) {
             std::cout << "Invalid board... Try entering a board again.\n";
         }
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
             std::cout << "Example: " << exampleBoard << "\n";
             hasTried = false;
         }
-    } while (boardInput != "exit");
+    }
 
     return 0;
 }
