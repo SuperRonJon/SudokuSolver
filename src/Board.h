@@ -4,6 +4,13 @@
 
 class Board
 {
+public:
+	Board(const std::string &input);
+	bool solve(long long& counter);
+	void print(bool borders = false);
+	int valueAt(int row, int col);
+
+private:
 	const int static BOARD_SIZE = 9;
 	Box grid[BOARD_SIZE][BOARD_SIZE];
 
@@ -14,12 +21,5 @@ class Board
 	bool solve(int row, int col, long long& counter);
 	bool isEmptyCharacter(char c);
 	void printLine();
-
-public:
-	Board(const std::string &input);
-	bool solve(long long& counter);
-	void print(bool borders = false);
-	int valueAt(int row, int col);
-
 };
 
