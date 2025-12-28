@@ -35,14 +35,14 @@ void ArgumentParser::add_option(char flag_t, const std::string &name_t, bool tak
 
 bool ArgumentParser::was_given(const std::string &name_t) {
     if(options_map_m.count(name_t) != 1) {
-        throw std::invalid_argument("Attempting to check argument " + name_t + " not expected.");
+        throw std::invalid_argument("Attempting to check option " + name_t + " not expected.");
     }
     return options_map_m.at(name_t).was_given();
 }
 
 std::string ArgumentParser::get_value(const std::string &name_t) {
     if(options_map_m.count(name_t) != 1) {
-        throw std::invalid_argument("Attempting to check argument " + name_t + " not expected.");
+        throw std::invalid_argument("Attempting to check option " + name_t + " not expected.");
     }
     return options_map_m.at(name_t).value();
 }
@@ -55,7 +55,7 @@ void ArgumentParser::parse(int argc, char **argv) {
         if(token.substr(0, 2) == "--") {
             std::string command_name = token.substr(2);
             if(options_map_m.count(command_name) == 0) {
-                throw std::invalid_argument("Argument --" + command_name + " not recognized.");
+                throw std::invalid_argument("Option --" + command_name + " not recognized.");
             }
             Option& curr_option = options_map_m.at(command_name);
             if(curr_option.takes_argument()) {
@@ -70,7 +70,7 @@ void ArgumentParser::parse(int argc, char **argv) {
             std::string options = token.substr(1);
             for(std::size_t j = 0; j < options.length(); j++) {
                 if(flag_map_m.count(options[j]) == 0) {
-                    throw std::invalid_argument("Argument -" + std::string{options[j]} + " not recognized.");
+                    throw std::invalid_argument("Option -" + std::string{options[j]} + " not recognized.");
                 }
                 Option& curr_option = options_map_m.at(flag_map_m.at(options[j]));
                 if(curr_option.takes_argument()) {
