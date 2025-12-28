@@ -6,7 +6,7 @@
 #include "Board.h"
 #include "ArgumentParser.h"
 
-#define VERSION "1.1"
+#define VERSION "1.2"
 
 long long solveBoard(const std::string &boardString, ArgumentParser &parser);
 void solveBoardsFromFile(const std::string &fileName, ArgumentParser &parser);
@@ -17,7 +17,12 @@ int main(int argc, char* argv[])
 {
     const std::string exampleBoard = "x56xxx27872xx361xx8xxxxx46x5xxx47xxx4x9xxx7x5xxx65xxx4x35xxxxx7xx718xx32918xxx54x";
     ArgumentParser parser = getParser();
-    parser.parse(argc, argv);
+    try {
+        parser.parse(argc, argv);
+    } catch(const std::invalid_argument &e) {
+        std::cerr << "Argument error: " << e.what() << "\n";
+        return 1;
+    }
 
     if(parser.was_given("version")) {
         std::cout << "sudoku " << VERSION << "\n";
