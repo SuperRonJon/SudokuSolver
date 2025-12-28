@@ -26,4 +26,4 @@ clean-windows:
 	del build\*
 
 clean:
-	rm build/*.o build/sudoku build/debug
+	rm -f build/*.o build/sudoku build/debug
