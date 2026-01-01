@@ -51,7 +51,7 @@ Options:
 
 The program accepts a string representation of a board, with numbers and "empty characters" to represent empty boxes. Valid empty characters are 'x', 'X', '0', 'O', 'o', or '.'. String must be exactly 81 characters long (representing a full 9x9 game board).
 
-With the -f flag or --file option, instead of a single baord string the program will instead accept a filepath to a text file containing a list of board strings, one per line in the file.
+With the -f flag or --file option, instead of a single board string the program will instead accept a filepath to a text file containing a list of board strings, one per line in the file.
 
 ## Installation
 
