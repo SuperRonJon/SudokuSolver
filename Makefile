@@ -16,20 +16,20 @@ $(PROGRAM): $(TARGET)
 all: $(PROGRAM) debug
 
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -s $^ -o $@
+    $(CXX) $(CXXFLAGS) -s $^ -o $@
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp | $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+    $(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(BUILDDIR):
-	@mkdir -p $(BUILDDIR)
+    @mkdir -p $(BUILDDIR)
 
 debug: $(BUILDDIR)/debug
 
 $(BUILDDIR)/debug: $(SRCS)
-	$(CXX) $(CXXFLAGS) -g $^ -o $@
+    $(CXX) $(CXXFLAGS) -g $^ -o $@
 
 clean:
-	$(RM) $(BUILDDIR)/*.o
-	$(RM) $(TARGET)
-	$(RM) $(BUILDDIR)/debug
+    $(RM) $(BUILDDIR)/*.o
+    $(RM) $(TARGET)
+    $(RM) $(BUILDDIR)/debug
