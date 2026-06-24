@@ -2,8 +2,14 @@ CXX 		?= g++
 CXXFLAGS 	?= -Wall -Wextra -Werror -O2
 BUILDDIR	?= build
 
+ifeq ($(OS),Windows_NT)
+	EXE_EXT := .exe
+else
+	EXE_EXT :=
+endif
+
 SRCDIR		:= src
-PROGRAM		:= sudoku
+PROGRAM		:= sudoku$(EXE_EXT)
 TARGET		:= $(BUILDDIR)/$(PROGRAM)
 
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
