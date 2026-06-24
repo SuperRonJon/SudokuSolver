@@ -1,29 +1,35 @@
-build/sudoku: build/box.o build/board.o build/sudokusolver.o build/argumentparser.o
-	g++ -Wall -Wextra -O2 build/box.o build/board.o build/sudokusolver.o build/argumentparser.o -o build/sudoku
+CXX 		?= g++
+CXXFLAGS 	?= -Wall -Wextra -Werror -O2
+BUILDDIR	?= build
 
-build/sudokusolver.o: src/SudokuSolver.cpp
-	g++ -Wall -Wextra -c -O2 src/SudokuSolver.cpp -o build/sudokusolver.o
+SRCDIR		:= src
+PROGRAM		:= sudoku
+TARGET		:= $(BUILDDIR)/$(PROGRAM)
 
-build/argumentparser.o: src/ArgumentParser.cpp
-	g++ -Wall -Wextra -c -O2 src/ArgumentParser.cpp -o build/argumentparser.o
+SRCS := $(wildcard $(SRCDIR)/*.cpp)
+OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
 
-build/board.o: src/Board.cpp
-	g++ -Wall -Wextra -c -O2 src/Board.cpp -o build/board.o
+.PHONY: all clean debug $(PROGRAM)
 
-build/box.o: src/Box.cpp
-	g++ -Wall -Wextra -c -O2 src/Box.cpp -o build/box.o
+$(PROGRAM): $(TARGET)
 
-build/debug: src/SudokuSolver.cpp src/ArgumentParser.cpp src/Board.cpp src/Box.cpp
-	g++ -Wall -Wextra -Wpedantic src/Box.cpp src/Board.cpp src/ArgumentParser.cpp src/SudokuSolver.cpp -o build/debug -g
+all: $(PROGRAM) debug
 
-debug: build/debug
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -s $^ -o $@
 
-sudoku: build/sudoku
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp | $(BUILDDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-all: build/debug build/sudoku
+$(BUILDDIR):
+	@mkdir -p $(BUILDDIR)
 
-clean-windows:
-	del build\*
+debug: $(BUILDDIR)/debug
+
+$(BUILDDIR)/debug: $(SRCS)
+	$(CXX) $(CXXFLAGS) -g $^ -o $@
 
 clean:
-	rm -f build/*.o build/sudoku build/debug
+	$(RM) $(BUILDDIR)/*.o
+	$(RM) $(TARGET)
+	$(RM) $(BUILDDIR)/debug
