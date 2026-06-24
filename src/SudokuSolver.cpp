@@ -2,6 +2,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 #include "Board.h"
 #include "ArgumentParser.h"
@@ -116,7 +117,7 @@ long long solveBoard(const std::string &boardString, ArgumentParser &parser) {
 void solveBoardsFromFile(const std::string &fileName, ArgumentParser &parser) {
     std::ifstream infile(fileName);
     std::string line;
-    std::vector<std::string> bigCounts;
+    std::vector<std::pair<std::string, long long>> bigCounts;
     int min_counts;
     try {
         min_counts = std::stoi(parser.get_value("required-checks"));
@@ -131,7 +132,7 @@ void solveBoardsFromFile(const std::string &fileName, ArgumentParser &parser) {
         std::cout << "Puzzle #" << count << " - " << line << "\n";
         long long count = solveBoard(line, parser);
         if (count >= min_counts && min_counts != -1) {
-            bigCounts.push_back(line);
+            bigCounts.push_back(std::make_pair(line, count));
         }
     }
 
@@ -139,7 +140,7 @@ void solveBoardsFromFile(const std::string &fileName, ArgumentParser &parser) {
         std::cout << "Puzzles with required checks over " << min_counts << "\n";
         std::cout << "==========================================\n";
         for (std::size_t i = 0; i < bigCounts.size(); i++) {
-            std::cout << bigCounts[i] << "\n";
+            std::cout << bigCounts[i].first << "\t" << bigCounts[i].second << "\n";
         }
     }
     
