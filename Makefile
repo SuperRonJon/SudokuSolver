@@ -12,6 +12,8 @@ SRCDIR		:= src
 PROGRAM		:= sudoku$(EXE_EXT)
 TARGET		:= $(BUILDDIR)/$(PROGRAM)
 
+DEBUGTARGET := $(BUILDDIR)/debug$(EXE_EXT)
+
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
 
@@ -30,9 +32,9 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp | $(BUILDDIR)
 $(BUILDDIR):
 	@mkdir -p $(BUILDDIR)
 
-debug: $(BUILDDIR)/debug
+debug: $(DEBUGTARGET)
 
-$(BUILDDIR)/debug: $(SRCS)
+$(DEBUGTARGET): $(SRCS)
 	$(CXX) $(CXXFLAGS) -g $^ -o $@
 
 clean:
